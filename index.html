@@ -11,8 +11,8 @@
 
 
     <div id="appTareas">{{ message }}
-        <input type="text" placeholder="Ingresar Tarea">
-        <button>Agregar Tarea</button>
+        <input type="text" placeholder="Ingresar Tarea" v-model="txtTarea">
+        <button v-on:click="agregarTarea">Agregar Tarea</button>
 
         <ul>
             <li>
@@ -29,9 +29,27 @@
     createApp({
         data() {
         return {
-            message: 'Hello Vue!'
+            message: 'Hello Vue!',
+            txtTarea: "...",
+            listaTareas: []
         }
-        }
+        },
+        //acciones de agregar y eliminar
+        methods: {
+        //Accion Agragar Tarea
+        agregarTarea: function (){
+            var tarea = this.txtTarea.trim();
+            if(tarea){
+                this.listaTareas.push({
+                    texto: tarea,
+                    checked: false
+                });
+            }
+            this.txtTarea = " ";
+            alert("Tarea Agregada");
+            console.log(this.listaTareas);
+        }    
+        },
     }).mount('#appTareas')
     </script>
 </body>
